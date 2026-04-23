@@ -21,15 +21,14 @@ function Board({ xIsNext, squares, onPlay }) {
   function handleClick(i) {
     if (calculateWinner(squares)) return;
 
+    const current = xIsNext ? 'X' : 'O';
+
     if (currentCount < 3) {
-      // Placement phase
       if (squares[i]) return;
       const nextSquares = squares.slice();
-      nextSquares[i] = xIsNext ? 'X' : 'O';
+      nextSquares[i] = current;
       onPlay(nextSquares);
     } else {
-      // Movement phase
-      const current = xIsNext ? 'X' : 'O';
       if (selected === null) {
         if (squares[i] === current) setSelected(i);
       } else {
@@ -37,6 +36,13 @@ function Board({ xIsNext, squares, onPlay }) {
           const nextSquares = squares.slice();
           nextSquares[i] = current;
           nextSquares[selected] = null;
+
+          // If moving away from center, check if opponent wins
+          if (selected === 4 && hasWinningMove(squares, current)) {
+            alert("You must move away from center since you have a winning move!");
+            return;
+          }
+
           setSelected(null);
           onPlay(nextSquares);
         } else {
@@ -106,6 +112,21 @@ export default function Game() {
       </div>
     </div>
   );
+}
+
+function hasWinningMove(squares, player) {
+  const lines = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6],
+  ];
+  for (let [a, b, c] of lines) {
+    const line = [squares[a], squares[b], squares[c]];
+    if (line.filter(s => s === player).length === 2 && line.includes(null)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function isAdjacent(a, b) {
