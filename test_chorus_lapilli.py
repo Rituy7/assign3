@@ -168,6 +168,16 @@ class TestChorusLapilli(unittest.TestCase):
         self.assertTileIs(tiles[0], self.SYMBOL_X)
         tiles[0].click()
         self.assertTileIs(tiles[0], self.SYMBOL_X)
+    def test_winner_declared(self):
+        '''Check that a winner is declared when three in a row.'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()  # X
+        tiles[3].click()  # O
+        tiles[1].click()  # X
+        tiles[4].click()  # O
+        tiles[2].click()  # X wins
+        winner_text = self.driver.find_element(By.CLASS_NAME, 'status').text
+        self.assertIn('Winner', winner_text)
 
 # ================= [DO NOT MAKE ANY CHANGES BELOW THIS LINE] =================
 
