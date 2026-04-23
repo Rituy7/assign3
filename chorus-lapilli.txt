@@ -1,0 +1,18 @@
+Modified tic-tac-toe to implement Chorus Lapilli rules.
+
+Steps taken:
+1. Added piece count tracking for X and O players
+2. Implemented placement phase - each player places up to 3 pieces
+3. Implemented movement phase - once a player has 3 pieces, they must
+   move an existing piece to an adjacent empty square instead of placing
+4. Added isAdjacent function to check if two squares are next to each other
+5. Added selected state to track which piece the player wants to move
+6. Added center square restriction - if a player occupies the center and
+   has a winning move available, they must move away from center first
+7. Added hasWinningMove function to detect if a player has a winning move
+
+Key differences from tic-tac-toe:
+- Players limited to 3 pieces each
+- Movement phase replaces placement once 3 pieces are on board
+- Pieces can only move to adjacent squares
+- Center square rule adds strategic complexity
