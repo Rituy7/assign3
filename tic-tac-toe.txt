@@ -1,0 +1,15 @@
+Completed the tic-tac-toe React tutorial from https://react.dev/learn/tutorial-tic-tac-toe
+
+Steps taken:
+1. Created basic Square component and Board layout with hardcoded values
+2. Made squares interactive with click handlers and useState
+3. Added turn-taking between X and O players
+4. Added winner detection with calculateWinner function
+5. Refactored into Game component with move history and time travel feature
+
+Key concepts learned:
+- React components and props
+- useState hook for managing state
+- Lifting state up to parent components
+- Immutability with array slice
+- Rendering lists with map and keys
