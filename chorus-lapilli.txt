@@ -1,18 +1,5 @@
-Modified tic-tac-toe to implement Chorus Lapilli rules.
+For the Chorus Lapilli variant, I had to modify the original game to handle a lot of new rules. I started by adding logic to track how many pieces X and O had on the board at any time.
 
-Steps taken:
-1. Added piece count tracking for X and O players
-2. Implemented placement phase - each player places up to 3 pieces
-3. Implemented movement phase - once a player has 3 pieces, they must
-   move an existing piece to an adjacent empty square instead of placing
-4. Added isAdjacent function to check if two squares are next to each other
-5. Added selected state to track which piece the player wants to move
-6. Added center square restriction - if a player occupies the center and
-   has a winning move available, they must move away from center first
-7. Added hasWinningMove function to detect if a player has a winning move
+The logic is split into two main parts. First is the placement phase, where each player just puts down their first 3 pieces. After that, it switches to a movement phase. I had to implement a selected state to keep track of which piece a player wants to move. I also wrote an isAdjacent function using coordinate math to make sure pieces only move to an empty square that is right next to them (including diagonals).
 
-Key differences from tic-tac-toe:
-- Players limited to 3 pieces each
-- Movement phase replaces placement once 3 pieces are on board
-- Pieces can only move to adjacent squares
-- Center square rule adds strategic complexity
+The most complicated part was definitely the center square rule. I had to write a hasWinningMove helper to check if a player occupying the center square actually had a way to win the game on that turn. If they did, I added a check to make sure their move was either a winning move or a move that involved leaving the center square. It took a bit of testing to make sure the selection logic and the movement rules all worked together, but the game now handles all the specific Chorus Lapilli constraints.
